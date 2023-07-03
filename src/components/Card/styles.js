@@ -63,9 +63,9 @@ export const CheckButton = styled.div`
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    color: white;
-    border: 2px solid #fff;
-    background: #075FF9;
+    color: ${({ done = false }) => done ? "#fff" : "#075FF9"};
+    border: 2px solid ${({ done = false }) => done ? "#fff" : "#075FF9"};
+    background: ${({ done = false }) => done ? "#075FF9" : "#fff"};
     cursor: pointer;
 `
 

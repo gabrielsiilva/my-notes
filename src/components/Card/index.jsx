@@ -1,16 +1,38 @@
-import { Container, Header, Content, Footer, CheckButton, AvatarContainer, Avatar, DateInformation } from './styles'
+import {
+  Container,
+  Header,
+  Content,
+  Footer,
+  CheckButton,
+  AvatarContainer,
+  Avatar,
+  DateInformation,
+} from './styles'
 import DoneIcon from '@mui/icons-material/Done'
+import { useTasksContext } from '../../context/TasksContext'
+import { useCallback } from 'react'
 
-function Card() {
+function Card({ task }) {
+  const { tasks, setTasks } = useTasksContext()
+  const { id, title, description, done } = task
+
+  const handleDoneTask = () => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, done: !task.done } : task
+      )
+    )
+  }
+
   return (
     <Container>
       <Header>
         <Content>
-          <p>Client Review & Feedback</p>
-          <span>Crypto Wallet Redesign</span>
+          <p>{title}</p>
+          <span>{description}</span>
         </Content>
 
-        <CheckButton>
+        <CheckButton done={done} onClick={handleDoneTask}>
           <DoneIcon />
         </CheckButton>
       </Header>
